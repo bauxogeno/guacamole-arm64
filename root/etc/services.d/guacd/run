@@ -1,0 +1,4 @@
+#!/usr/bin/with-contenv sh
+
+echo "Starting guacamole guacd binding to all interface ..."
+s6-setuidgid root guacd -f -b 0.0.0.0

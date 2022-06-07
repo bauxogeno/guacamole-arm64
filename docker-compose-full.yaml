@@ -1,0 +1,32 @@
+version: '3.5'
+
+## proxynet attached to nginx network
+networks:
+  proxynet:
+    name: nginx_default
+
+services: 
+
+  guacd:
+    container_name: compose_guacd  
+    image: bauxogeno/guacamole-arm-build:latest
+    ports: 
+      - 4822/tcp    
+    networks:
+      - proxynet
+
+  guacamole:
+    container_name: compose_guacamole  
+    depends_on:
+    - guacd    
+    image: bauxogeno/guac-web-arm64:latest
+    links:
+    - guacd
+    ports: 
+      - 8080/tcp
+    volumes: 
+      - ./data/config/:/config/:rw
+#    environment: 
+#      - EXTENSIONS=auth-duo
+    networks:
+      - proxynet

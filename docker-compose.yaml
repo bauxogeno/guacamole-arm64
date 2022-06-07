@@ -1,0 +1,20 @@
+version: '3.5'
+
+## proxynet attached to nginx network
+networks:
+  proxynet:
+    name: nginx_default
+
+services: 
+  guacamole:
+    container_name: compose_guacamole  
+    image: bauxogeno/guacamole:latest
+    ports: 
+      - 8180:8080
+    volumes: 
+      - ./data/config/:/config/:rw
+    environment: 
+      - EXTENSIONS=auth-duo
+      - GUACD_LOG_LEVEL=debug
+    networks:
+      - proxynet
