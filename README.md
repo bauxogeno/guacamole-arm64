@@ -1,5 +1,8 @@
 # guacamole ARM64
 
+Based on project https://github.com/oznu/docker-guacamole
+
+This project use the new arm/v8 architecture rather than v6 used in based repo.
 
 ## Build guacamole-server (guacd)
 
